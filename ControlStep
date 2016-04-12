@@ -1,0 +1,167 @@
+1.	İşletim Sistemi Yapılandırma
+
+	  Windows Server									
+										
+		Kurulum Kontrolleri   ( SYSTEMINFO - systeminfo.exe ları alınacak )									
+											
+		Kurulum Prosedürleriniz varmı ? ( İhtiyaca yönelik -- Web, FTP, DNS Servis Kurulum prosedürleriniz var mı ) 									
+											
+		Sunucu Kurulumlarından Sonra Sistemi Sıkılaştırmak İçin Oluşturduğunuz Adımlarınız Var  mı ?									
+		Adımlar Listesinde Olacak Olanlar									
+			Sunucu Rolune Bağlı Gereksiz Servisleri Devre Dışı Bırakma								
+			Kullanılmayan Güvenlik duvarı Kurallarını Kaldırma								
+			Sınırlı Denetim İlkeleri Tanımlama								
+			Bu ilkeleri birden fazla sunucuya tanımlama ve ilkeleri geri döndürme								
+											
+		System Security Wizard ( Güvenlik yapılandırma Sihirbazı ) Kullanılarak Bir Template Oluşturulmuş mu									
+		Oluşturulmuş ise Güvenlik yapılandırma Sihirbazı ile kontrol edilir 									
+											
+		Sunucular Domaine Alınmış mı ?
+		
+2.	Kurulum Sonrası Yama Güncelleme Kontrollleri
+
+    Windows Server										
+		Yama Güncellemeleri Yapmak İçin Uzak Sunucu Yapılandırılmış mı 									
+		Yamalar test ortamında deneniyormu ?									
+		Yama Yapılmadan önce Yedekleme Prosedürü İşliyormu ?									
+		Tanımlamaları ( WSUS Windows Server Update Server )									
+		WSUS Kontrolü 									
+			Registry Tanımları Clientta ( HKLM - Software - Microsoft - Windows -WindowsUpdate altında Sunucu Ip yada Adı tanımlanmışmı )								
+			Serverda GPO Tanımları ( Computer Configuration - Administrative Templates - Windows Components - Windows Update )								
+											
+		Otomatik Yama Güncellemleri Yaparken Eğer Yama varsa Kullanıcı Uyar Set Edilmiş mi  									
+											
+3.	Kullanıcı Hesap Kontrolleri 
+
+	  Windows Server										
+			Group Policy Managment ( Computer Configuration (Enabled) -> Policies -> Windows Settings -> Security Settings -> 								
+										Account Policies/Password Policy )	
+		Kullanıcı Parola Politikaları Uygulanıyor mu									
+											
+		Minimum Parola Boyutu Ne Olarak Ayarlanmış									
+											
+		Parola Complex Olması Gerekir Set Edilmiş mi									
+											
+		Parola Kilitleme İle İlgiliBir değer Set Edilmişmi									
+											
+			Lockout duration ?								
+			Lockupt threshold ?								
+			Locout counter ?								
+											
+3.	GPO Kullanıcı Erişim Kontrolleri 		
+
+	Windows Server										
+			Group Policy Managment ( Computer Configuration -> Windows Settings -> Security Settings -> Local Policies )								
+											
+		Yukardaki Group Policy İçerisinde Tanımlanan Ayarlara Herhangi bir Kullanıcı yada Grup Atanmışmı ) 									
+											
+4.	GPO Güvenlik Sıkılaştırma Kontrolleri		
+
+	Windows Server										
+		Local Computer ise									
+			Local Computer Policy ( Windows Settings -> Security Settings -> Local Policies  - Account Policy )								
+											
+		Domain Bilgisayarı ise									
+											
+			Group Policy Managment ( Computer Configuration -> Windows Settings -> Security Settings ->Account Policies )								
+											
+											
+5.	GPO Network Erişim Sıkılaştırma Kontrolleri			
+
+	Windows Server										
+											
+		Group Policy Managment ( User Configuration -> Policy -> Administrative Template -> Network - Network Connections )									
+											
+											
+6.	GPO NetworkGüvenlik Sıkılaştırma Kontrolleri										
+											
+		Group Policy Managment ( Computer Configuration -> Windows Settings -> Security Settings -> Local Policies -> Security Options )									
+											
+											
+											
+7.	GPO Domain Kullanıcı Güvenlik Sıkılaştırma Kontrolleri										
+											
+		Group Policy Managment ( Computer Configuration -> Windows Settings -> Security Settings -> Local Policies -> Security Options )									
+											
+											
+											
+8.	GPO Domain Kullanıcı Logon/Logoff Aktivite Takibi										
+											
+		Group Policy Managment ( Computer Configuration -> Windows Settings -> Security Settings -> Local Policies -> Audit Policy )									
+											
+											
+											
+9.	GPO Domain Log Kayıtları Sıkılaştırma Kontrolleri 										
+											
+		Group Policy Managment ( Computer Configuration -> Windows Settings -> Security Settings -> Event Log									
+											
+		LOG ların başka yere yönlendirilmesi için bir uygulama çalışıyor mu 									
+		( Log Managment -SIEM )									
+											
+											
+8.	Sunucu Ek Güvenlik Kontrolleri 										
+	Windows Server										
+		Gereksiz Servisler Sunucue Üzerinde Çalışıyor mu									
+											
+		Gereksiz Kullanıcı ve Grup Tanımlamaları var mı 									
+											
+		Kullanıcı Hak Kontrolleri									
+		( Kaç Kişi Domain Admin - Administrator  Kullanıcısı İlemi Giriş Yapılıyor - Guest Hesabı Aktif mi  )									
+											
+		Sunucu Disk Bölümlemesi NTFS olarak mı Yapılandırılmış mı									
+											
+		Remote Registry Pasif Edilmiş mi ?									
+			Group Policy Managment ( Computer Configuration -> Windows Settings -> Security Settings -> System Services								
+									Remote Registry		Aktif mi
+											
+		Paylaşım Klasörleri Var mı - Gereksiz Paylaşımlar Varmı ( C$ ve D$ ) ?									
+											
+											
+9.	Sistem Ek  Kontrolleri										
+		Sunucunun Günün tarih ve Saatini Alacağı bir Ek Sunucu Var mı ? ( NTP Sunucusu - Domain Sunucsu )									
+											
+		Sunucu Üzerinde Anti-Virus Yazılımı Var mı ? - ( Database Güncel mi )									
+											
+		Sunucu Üzerinde Anti-Syware Yazılımı Var mı ? ( Database Güncel mi )									
+											
+		Sunucu üzerinde dosya bütünlüğünü kontrol eden yazılımlar mevcut mu ? ( Authantication Server Üzerinde Olması Gerekli HIPS )									
+											
+		Sunucular arası RDP Güvenli olarak yapılıyor mu					( set client connection encryption level - require specific security )				
+			GPO - Computer Configuration - Administrative Templates - Windows Components - Remote Desktop Services - 								
+								Remote Desktop Session Host -> Security			
+											
+10.	Sistem Ek  Kontrolleri Devam										
+		Sunucu ve Client "Screen Saver Password Protect"   Varmı ?									
+		GPO ->	user Configuration - Administrative Templates - Control Panel - Personalization - Password Protect Screen Saver								
+											
+		Sunucu Üzerinde Gereksiz Tanımlanmış Görevler Var mı									
+											
+		Sunucu Performans Prosedürleri Mevcut mu - Ne zamanda Bir Yapılıyor									
+		( Disk Birleştirmesi - Geçici Dosyaların Temizlenmesi - Kapasite Kontrollerinini Yapılması )									
+											
+		Belli aralıklarla Sistem Geri Yükleme Noktaları Oluşturulmuş mu 									
+											
+		BIOS Şifresi Kullanılıyormu									
+											
+		Dışarıya Açık Olan Servislerin ( WEB - FTP ) Dosya izinlerinin Kontrolü	
+											
+11.	Yedekleme Kontrolleri										
+											
+		Backup Alınıyormu									
+											
+		Günlük Haftalık Aylık Backup Prosedürleri Avr mı  									
+											
+		Backup Yazılımları varmı ?									
+											
+		Systeam State ve Registry Backup ları Alınıyor mu 									
+											
+		Yedekler Farklı Bir Lokasyonda Tutuluyor mu									
+											
+		Alınan Backup lar Test Ortamında Denenmiş mi									
+											
+											
+12.	Host Firewall - Güvenlik Duvarı Kontrolleri										
+											
+		Güvenlik Duvarı Aktif mi									
+											
+		Güvenlik Duvarı Üzerinde Gereken Servisler İzin Verilmişmi 									
